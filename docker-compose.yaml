@@ -1,0 +1,46 @@
+services:
+  database:
+    container_name: mydb
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=redhat
+      - MYSQL_USER=mushahid
+      - MYSQL_PASSWORD=redhat
+      - MYSQL_DATABASE=myapp
+    volumes:
+      - myvolume:/var/lib/mysql
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5 
+
+
+  backend:
+    depends_on:
+      database:
+        condition: service_healthy
+    container_name: myserver
+    build:
+      context: .
+    image: mushahid144/flask:v1
+    ports:
+      - 80:80
+    environment:
+      - HOST=mydb
+      - USER=mushahid
+      - PASSWORD=redhat
+      - DATABASE=myapp
+    networks:
+      - mynetwork
+
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  myvolume:
+    driver: local

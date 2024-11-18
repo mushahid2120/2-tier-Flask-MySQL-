@@ -1,0 +1,24 @@
+services:
+  database:
+    container_name: mydb
+    image: mysql
+    networks:
+      - mynetwork
+    volumes:
+      - ./data/:/var/lib/mysql
+        #- ./message.sql:/docker-entrypoint-initdb.d/message.sql  
+    environment:
+      - MYSQL_ROOT_PASSWORD=r
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=redhat
+      - MYSQL_DATABASE=mysql
+    
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  mynetwork:
+    driver: bridge

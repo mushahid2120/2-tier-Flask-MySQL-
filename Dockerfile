@@ -2,9 +2,9 @@ FROM python
 WORKDIR project/
 COPY . .
 RUN python -m pip install --upgrade pip 
-RUN pip install flask pymysql
+RUN pip install flask pymysql cryptography
 
-EXPOSE 4000
+EXPOSE 80
 
 ENTRYPOINT ["python"]
 CMD ["myapp.py"]

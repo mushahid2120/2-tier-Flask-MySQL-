@@ -8,16 +8,18 @@ USER=os.getenv('USER')
 PASSWORD=os.getenv('PASSWORD')
 DATABASE=os.getenv('DATABASE')
 
+print("Environmental variable = ",HOST," ",USER," "," ",PASSWORD," ",DATABASE)
+
 app=Flask(__name__)
 
-
-myconnection=None;
+myconnection=pymysql.connect(host=HOST,user=USER,passwd=PASSWORD,database=DATABASE)
+print(myconnection)
 
 def initDB():
     global myconnection
     try:
-        myconnection=pymysql.connect(host=HOST,user=USER,passwd=PASSWORD,database=DATABASE) 
         cur=myconnection.cursor()
+        print('connection ',cur)
         cur.execute('CREATE DATABASE IF NOT EXISTS myapp')
         cur.execute('USE myapp')
         if (cur.execute('CREATE TABLE IF NOT EXISTS Messages (data VARCHAR(30))')==0):
@@ -29,9 +31,8 @@ def initDB():
 
 @app.route('/')
 def home():
-    global cur
     fetchMessage=fetchData()
-    print("fetched data : ")
+    print("fetched data : ",fetchMessage)
     return render_template('index.html',messages=fetchMessage)
 
 
