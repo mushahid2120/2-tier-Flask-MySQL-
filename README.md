@@ -1,4 +1,4 @@
-# Docker Project: 2-Tier Flask-MySQL Application
+# 2-Tier App (Flask,Mysql)
 
 This repository demonstrates the implementation of a two-tier architecture using Docker. The project includes a **Flask** application as the front-end tier and **MySQL** as the back-end database tier. The components are containerized using Docker for seamless deployment and scalability.
 
