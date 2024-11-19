@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploy-flask
+  labels:
+    app: deployflask
+spec:
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      name: myflask
+      labels:
+        app: flask
+    spec:
+      containers:
+        - name: flask-con
+          image: mushahid144/flask:v1
+          env:
+            - name: HOST
+              value: "mysql-svc"
+            - name: USER
+              value: "root"
+            - name: PASSWORD
+              value: "redhat"
+            - name: DATABASE
+              value: "mysql"
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+
+

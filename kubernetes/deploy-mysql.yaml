@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeploy-db
+  labels:
+    app: deploydb
+spec:
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      name: sql
+      labels:
+        app: db
+    spec:
+      volumes:
+        - name: storage1
+          persistentVolumeClaim:
+            claimName: sql-pvc
+      containers:
+        - name: sql-con
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "redhat"
+          volumeMounts:
+            - mountPath: /var/lib/mysql/
+              name: storage1
+
+
