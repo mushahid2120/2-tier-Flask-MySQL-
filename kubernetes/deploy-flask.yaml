@@ -23,9 +23,13 @@ spec:
             - name: USER
               value: "root"
             - name: PASSWORD
-              value: "redhat"
+              valueFrom:
+                secretKeyRef:
+                  name: mysec
+                  key: MYSQL_ROOT_PASSWORD
+
             - name: DATABASE
-              value: "mysql"
+              value: "myapp"
           ports:
             - containerPort: 80
           imagePullPolicy: Always
