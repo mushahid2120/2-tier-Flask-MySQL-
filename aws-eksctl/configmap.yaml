@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfig
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS myapp;
+    USE myapp;
+    CREATE TABLE IF NOT EXISTS Messages (data VARCHAR(30));

@@ -1,0 +1,1 @@
+eksctl create cluster --name flask-mysql --region ap-southeast-2 --version 1.31 --nodegroup-name my-ng --instance-types t2.micro --with-oidc --nodes 3 --nodes-min 3 --nodes-max 5 --node-volume-size 20 --managed
