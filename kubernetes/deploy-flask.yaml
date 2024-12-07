@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: flask-con
-          image: mushahid144/flask:v1
+          image: mushahid144/flask-mysql:v1
           env:
             - name: HOST
               value: "mysql-svc"
